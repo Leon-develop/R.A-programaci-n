@@ -6,7 +6,12 @@
 		<div>
 			<h1>Another page</h1>
 			<h2>Hello ${message}</h2>
-			Click on this <strong><a href="/">link</a></strong> to visit previous page.
+			<strong><a href="/">home</a></strong> 
+			<br>
+			<strong><a href="/productos">productos</a></strong> 
+			 <br>
+			 <strong><a href="/cliente">clientes</a></strong> 
+			 <br>
 		</div>
 	</div>
 </body>
