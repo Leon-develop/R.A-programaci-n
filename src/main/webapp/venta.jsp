@@ -1,6 +1,6 @@
 <%-- 
-    Document   : empleado
-    Created on : 16/12/2019, 03:29:48 PM
+    Document   : venta
+    Created on : 16/12/2019, 04:22:57 PM
     Author     : Leo González
 --%>
 
@@ -20,51 +20,43 @@
          <div class="container">
             <header>
                 <h2>${message}</h2>
-                Click on this <strong><a href="venta">link</a></strong> to visit another page.
+                Click on this <strong><a href="/">link</a></strong> to visit another page.
                 <br>
-                Click on this <strong><a href="admin">link</a></strong> to visit previous page.
+                Click on this <strong><a href="empleado">link</a></strong> to visit previous page.
                 <br>
                 <a href="https://datatables.net/examples/api/select_single_row.html">
                     https://datatables.net/examples/api/select_single_row.html
                 </a>
                 <br>
                 <br>
-                <label>Agregar un nuevo Empleado.</label>
+                <label>Registre una nueva venta.</label>
                 <br>
                 <br>
             </header>
                 <form method="post" >
-                <label>Nombre</label>
-                <input type="text" name="nombre" >
-                <label>Apellidos</label>
-                <input type="text" name="apellidos" >
-                <label>Cargo</label>
-                <input type="text" name="cargo" >
-                <label>Telefono</label>
-                <input type="text" name="telefono" >               
+                <label>Detalle de venta</label>
+                <input type="text" name="detalleventa" >
+                <label>Fecha</label>
+                <input type="text" name="fecha" >                              
                 
                 <button type= "button" onclick="save()"  >Guardar</button>
             </form>
 
-            <h1>Administradores</h1>
+            <h1>Ventas</h1>
             <h2>Empleando los parámetros Model</h2>
             <div class="starter-template">
                 <table class="table table-striped table-hover table-condensed table-bordered">
                     <tr>
                      <th>Id</th>
-                     <th>Nombre</th>
-                     <th>Apellidos</th>
-                       <th>Cargo</th>
-                         <th>Telefono</th>                       
+                     <th>Detalle de venta</th>
+                     <th>Fecha</th>                                            
                            
                     </tr>
-                    <c:forEach var="emp" items="${empleado}">
+                    <c:forEach var="vent" items="${venta}">
                      <tr>
-                      <td>${emp.id}</td>
-                      <td>${emp.nombre}</td>
-                      <td>${emp.apellidos}</td>
-                      <td>${emp.cargo}</td>
-                       <td>${emp.telefono}</td>                     
+                      <td>${vent.id}</td>
+                      <td>${vent.detalleventa}</td>
+                      <td>${vent.fecha}</td>                                         
                      </tr>
                     </c:forEach>
                 </table>
@@ -74,24 +66,20 @@
             <h2>Empleando la rest Api</h2>
             <button id="btnDelete" type="button" >Borrar fila seleccionada</button>
             <div class="starter-template">
-                <table id="empleadoTable" class="display">
+                <table id="ventaTable" class="display">
                    <thead>
                         <tr>
                             <th>Id</th>
-                            <th>Nombre</th>
-                            <th>Apellidos</th>
-                             <th>Cargo</th>                            
-                              <th>Telefono</th>
+                            <th>Detalle de venta</th>
+                            <th>Fecha</th>                            
                                
                         </tr>
                     </thead>
                     <tfoot>
                         <tr>
                             <th>id</th>
-                            <th>nombre</th>
-                            <th>apellidos</th>
-                            <th>cargo</th>                         
-                            <th>telefono</th>
+                            <th>detalleventa</th>
+                            <th>fecha</th>                           
                             
                         </tr>
                     </tfoot>
@@ -105,7 +93,7 @@
         <script type="text/javascript" src="webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
         <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
-    	<script src="${contextPath}/resources/js/datatableempleado.js"></script>
+    	<script src="${contextPath}/resources/js/datatableventa.js"></script>
         <script>
             /*
             (function ($) {
@@ -133,14 +121,14 @@
                     console.log (urlport);
                     $.ajax({
                         //url: urlport + "/api/productos", // verificar si se utiliza la ruta y puerto desde application.properties
-                        url: "/api/empleado",
+                        url: "/api/venta",
                         type: 'POST', dataType: 'json',
                         contentType: "application/json; charset=utf-8",
                         data: dataForm,
                         success: function(data) {
                             console.log ( data.nombre );
                             //$('#productosTable').dataTable().fnClearTable(); // borrar todo
-                            $('#empleadoTable').dataTable().fnAddData(data);
+                            $('#ventaTable').dataTable().fnAddData(data);
                         }, 
                         error: function( jqXHR, textStatus, errorThrown ) {
                             alert ("error: " + textStatus );
@@ -151,8 +139,8 @@
                 }
 
                 $(document).ready(function() {
-                    var table = $('#empleadoTable').DataTable();
-                    $('#empleadoTable tbody').on( 'click', 'tr', function () {
+                    var table = $('#ventaTable').DataTable();
+                    $('#ventaTable tbody').on( 'click', 'tr', function () {
                         if ( $(this).hasClass('selected') ) {
                             $(this).removeClass('selected');
                         }

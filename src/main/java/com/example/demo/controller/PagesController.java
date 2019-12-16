@@ -6,12 +6,14 @@ import com.example.demo.model.Empleado;
 import com.example.demo.model.Pedidos;
 import com.example.demo.model.Producto;
 import com.example.demo.model.Proveedores;
+import com.example.demo.model.Ventas;
 import com.example.demo.repository.AdminRepository;
 import com.example.demo.repository.ClienteRepository;
 import com.example.demo.repository.EmpleadoRepository;
 import com.example.demo.repository.PedidoRepository;
 import com.example.demo.repository.ProductoRepository;
 import com.example.demo.repository.ProveedoresRepository;
+import com.example.demo.repository.VentaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.env.Environment;
@@ -48,6 +50,10 @@ public class PagesController {
         private Environment envemp;
         @Autowired
         EmpleadoRepository empleadoRepository;
+        @Autowired
+        private Environment envvent;
+        @Autowired
+        VentaRepository ventaRepository;
 
 	@RequestMapping("/productos")
 	public String home(Model model) {
@@ -127,6 +133,19 @@ public class PagesController {
 		}
 		model.addAttribute("empleado", empleadoRepository.findAll());
 		return "empleado";
+        }
+        @RequestMapping("/venta")
+	public String home7(Model model) {
+		model.addAttribute("site_urlport", envvent.getProperty("site.urlport") );
+		//System.out.println( env.getProperty("site.urlport") );
+
+		model.addAttribute("message", "VENTAS");
+                
+		for (Ventas p: ventaRepository.findAll() ) {
+			System.out.println(p.detalleventa);
+		}
+		model.addAttribute("venta", ventaRepository.findAll());
+		return "venta";
         }
 		
 	@RequestMapping("/")

@@ -20,6 +20,8 @@
                           <br>
                            <strong><a href="/empleado">Empleados</a></strong>
                            <br>
+                           <strong><a href="/venta">Ventas</a></strong>
+                           <br>
 		</div>
 	</div>
 </body>
