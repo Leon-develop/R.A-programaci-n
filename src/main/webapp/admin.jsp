@@ -1,6 +1,6 @@
 <%-- 
-    Document   : pedido
-    Created on : 16/12/2019, 02:21:32 AM
+    Document   : admin
+    Created on : 16/12/2019, 03:20:23 AM
     Author     : Leo González
 --%>
 
@@ -20,47 +20,55 @@
          <div class="container">
             <header>
                 <h2>${message}</h2>
-                Click on this <strong><a href="admin">link</a></strong> to visit another page.
+                Click on this <strong><a href="/">link</a></strong> to visit another page.
                 <br>
-                Click on this <strong><a href="proveedor">link</a></strong> to visit previous page.
+                Click on this <strong><a href="pedido">link</a></strong> to visit previous page.
                 <br>
                 <a href="https://datatables.net/examples/api/select_single_row.html">
                     https://datatables.net/examples/api/select_single_row.html
                 </a>
                 <br>
                 <br>
-                <label>Agregar un nuevo pedido.</label>
+                <label>Agregar un nuevo Administrador.</label>
                 <br>
                 <br>
             </header>
                 <form method="post" >
-                <label>Concepto</label>
-                <input type="text" name="concepto" >
-                <label>Cantidad</label>
-                <input type="text" name="cantidad" >
-                <label>Precio</label>
-                <input type="text" name="precio" >
+                <label>Nombre</label>
+                <input type="text" name="nombre" >
+                <label>Apellidos</label>
+                <input type="text" name="apellidos" >
+                <label>Direccion</label>
+                <input type="text" name="direccion" >
+                <label>Correo</label>
+                <input type="text" name="correo" >
+                <label>Telefono</label>
+                <input type="text" name="telefono" >
                 
                 <button type= "button" onclick="save()"  >Guardar</button>
             </form>
 
-            <h1>Pedidos</h1>
+            <h1>Administradores</h1>
             <h2>Empleando los parámetros Model</h2>
             <div class="starter-template">
                 <table class="table table-striped table-hover table-condensed table-bordered">
                     <tr>
                      <th>Id</th>
-                     <th>Concepto</th>
-                     <th>Cantidad</th>
-                       <th>Precio</th>                        
+                     <th>Nombre</th>
+                     <th>Apellidos</th>
+                       <th>Direccion</th>
+                         <th>Correo</th>
+                         <th>Telefono</th>
                            
                     </tr>
-                    <c:forEach var="pedidos" items="${pedido}">
+                    <c:forEach var="adm" items="${admin}">
                      <tr>
-                      <td>${pedidos.id}</td>
-                      <td>${pedidos.concepto}</td>
-                      <td>${pedidos.cantidad}</td>
-                      <td>${pedidos.precio}</td>                       
+                      <td>${adm.id}</td>
+                      <td>${adm.nombre}</td>
+                      <td>${adm.apellidos}</td>
+                      <td>${adm.direccion}</td>
+                       <td>${adm.correo}</td>
+                       <td>${adm.telefono}</td>
                      </tr>
                     </c:forEach>
                 </table>
@@ -70,22 +78,26 @@
             <h2>Empleando la rest Api</h2>
             <button id="btnDelete" type="button" >Borrar fila seleccionada</button>
             <div class="starter-template">
-                <table id="pedidoTable" class="display">
+                <table id="adminTable" class="display">
                    <thead>
                         <tr>
                             <th>Id</th>
-                            <th>Concepto</th>
-                            <th>Cantidad</th>
-                             <th>Precio</th>                            
+                            <th>Nombre</th>
+                            <th>Apellidos</th>
+                             <th>Direccion</th>
+                              <th>Correo</th>
+                              <th>Telefono</th>
                                
                         </tr>
                     </thead>
                     <tfoot>
                         <tr>
                             <th>id</th>
-                            <th>concepto</th>
-                            <th>cantidad</th>
-                            <th>precio</th>                           
+                            <th>nombre</th>
+                            <th>apellidos</th>
+                            <th>direccion</th>
+                            <th>correo</th>
+                            <th>telefono</th>
                             
                         </tr>
                     </tfoot>
@@ -99,7 +111,7 @@
         <script type="text/javascript" src="webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
         <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
-    	<script src="${contextPath}/resources/js/datatablepedido.js"></script>
+    	<script src="${contextPath}/resources/js/datatableadmin.js"></script>
         <script>
             /*
             (function ($) {
@@ -127,14 +139,14 @@
                     console.log (urlport);
                     $.ajax({
                         //url: urlport + "/api/productos", // verificar si se utiliza la ruta y puerto desde application.properties
-                        url: "/api/pedido",
+                        url: "/api/admin",
                         type: 'POST', dataType: 'json',
                         contentType: "application/json; charset=utf-8",
                         data: dataForm,
                         success: function(data) {
                             console.log ( data.nombre );
                             //$('#productosTable').dataTable().fnClearTable(); // borrar todo
-                            $('#pedidoTable').dataTable().fnAddData(data);
+                            $('#adminTable').dataTable().fnAddData(data);
                         }, 
                         error: function( jqXHR, textStatus, errorThrown ) {
                             alert ("error: " + textStatus );
@@ -145,8 +157,8 @@
                 }
 
                 $(document).ready(function() {
-                    var table = $('#pedidoTable').DataTable();
-                    $('#pedidoTable tbody').on( 'click', 'tr', function () {
+                    var table = $('#adminTable').DataTable();
+                    $('#adminTable tbody').on( 'click', 'tr', function () {
                         if ( $(this).hasClass('selected') ) {
                             $(this).removeClass('selected');
                         }
@@ -165,4 +177,3 @@
     </body>
 
 </html>
-

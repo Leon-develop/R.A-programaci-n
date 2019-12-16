@@ -1,9 +1,11 @@
 package com.example.demo.controller;
 
+import com.example.demo.model.Admin;
 import com.example.demo.model.Cliente;
 import com.example.demo.model.Pedidos;
 import com.example.demo.model.Producto;
 import com.example.demo.model.Proveedores;
+import com.example.demo.repository.AdminRepository;
 import com.example.demo.repository.ClienteRepository;
 import com.example.demo.repository.PedidoRepository;
 import com.example.demo.repository.ProductoRepository;
@@ -36,6 +38,10 @@ public class PagesController {
         private Environment envped;
         @Autowired
         PedidoRepository pedidoRepository;
+        @Autowired
+        private Environment envad;
+        @Autowired
+        AdminRepository adminRepository;
          
 
 	@RequestMapping("/productos")
@@ -90,6 +96,19 @@ public class PagesController {
 		}
 		model.addAttribute("pedido", pedidoRepository.findAll());
 		return "pedido";
+        }
+         @RequestMapping("/admin")
+	public String home5(Model model) {
+		model.addAttribute("site_urlport", envad.getProperty("site.urlport") );
+		//System.out.println( env.getProperty("site.urlport") );
+
+		model.addAttribute("message", "ADMINISTRADORES");
+                
+		for (Admin p: adminRepository.findAll() ) {
+			System.out.println(p.nombre);
+		}
+		model.addAttribute("admin", adminRepository.findAll());
+		return "admin";
         }
 		
 	@RequestMapping("/")
