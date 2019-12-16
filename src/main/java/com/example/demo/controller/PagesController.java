@@ -2,11 +2,13 @@ package com.example.demo.controller;
 
 import com.example.demo.model.Admin;
 import com.example.demo.model.Cliente;
+import com.example.demo.model.Empleado;
 import com.example.demo.model.Pedidos;
 import com.example.demo.model.Producto;
 import com.example.demo.model.Proveedores;
 import com.example.demo.repository.AdminRepository;
 import com.example.demo.repository.ClienteRepository;
+import com.example.demo.repository.EmpleadoRepository;
 import com.example.demo.repository.PedidoRepository;
 import com.example.demo.repository.ProductoRepository;
 import com.example.demo.repository.ProveedoresRepository;
@@ -42,7 +44,10 @@ public class PagesController {
         private Environment envad;
         @Autowired
         AdminRepository adminRepository;
-         
+         @Autowired
+        private Environment envemp;
+        @Autowired
+        EmpleadoRepository empleadoRepository;
 
 	@RequestMapping("/productos")
 	public String home(Model model) {
@@ -109,6 +114,19 @@ public class PagesController {
 		}
 		model.addAttribute("admin", adminRepository.findAll());
 		return "admin";
+        }
+        @RequestMapping("/empleado")
+	public String home6(Model model) {
+		model.addAttribute("site_urlport", envemp.getProperty("site.urlport") );
+		//System.out.println( env.getProperty("site.urlport") );
+
+		model.addAttribute("message", "ADMINISTRADORES");
+                
+		for (Empleado p: empleadoRepository.findAll() ) {
+			System.out.println(p.nombre);
+		}
+		model.addAttribute("empleado", empleadoRepository.findAll());
+		return "empleado";
         }
 		
 	@RequestMapping("/")

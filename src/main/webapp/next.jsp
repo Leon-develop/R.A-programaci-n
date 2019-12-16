@@ -18,6 +18,8 @@
                          <br>
                           <strong><a href="/admin">Administradores</a></strong> 
                           <br>
+                           <strong><a href="/empleado">Empleados</a></strong>
+                           <br>
 		</div>
 	</div>
 </body>
