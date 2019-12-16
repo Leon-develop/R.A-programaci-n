@@ -1,9 +1,11 @@
 package com.example.demo.controller;
 
 import com.example.demo.model.Cliente;
+import com.example.demo.model.Pedidos;
 import com.example.demo.model.Producto;
 import com.example.demo.model.Proveedores;
 import com.example.demo.repository.ClienteRepository;
+import com.example.demo.repository.PedidoRepository;
 import com.example.demo.repository.ProductoRepository;
 import com.example.demo.repository.ProveedoresRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +32,10 @@ public class PagesController {
         private Environment envpr;
         @Autowired
         ProveedoresRepository proveedoresRepository;
+        @Autowired
+        private Environment envped;
+        @Autowired
+        PedidoRepository pedidoRepository;
          
 
 	@RequestMapping("/productos")
@@ -71,11 +77,25 @@ public class PagesController {
 		model.addAttribute("proveedor", proveedoresRepository.findAll());
 		return "proveedor";
         }
+        
+        @RequestMapping("/pedido")
+	public String home4(Model model) {
+		model.addAttribute("site_urlport", envped.getProperty("site.urlport") );
+		//System.out.println( env.getProperty("site.urlport") );
+
+		model.addAttribute("message", "PEDIDOS");
+                
+		for (Pedidos p: pedidoRepository.findAll() ) {
+			System.out.println(p.concepto);
+		}
+		model.addAttribute("pedido", pedidoRepository.findAll());
+		return "pedido";
+        }
 		
 	@RequestMapping("/")
 	public String next(Map<String, Object> model) {
 		model.put("message", "Vas muy bien !!!");
 		return "next";
 	}
-
+        
 }

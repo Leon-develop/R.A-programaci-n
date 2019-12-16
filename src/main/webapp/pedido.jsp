@@ -1,6 +1,6 @@
 <%-- 
-    Document   : proveedor
-    Created on : 15/12/2019, 11:14:36 PM
+    Document   : pedido
+    Created on : 16/12/2019, 02:21:32 AM
     Author     : Leo González
 --%>
 
@@ -20,51 +20,47 @@
          <div class="container">
             <header>
                 <h2>${message}</h2>
-                Click on this <strong><a href="pedido">link</a></strong> to visit another page.
+                Click on this <strong><a href="/">link</a></strong> to visit another page.
                 <br>
-                Click on this <strong><a href="cliente">link</a></strong> to visit previous page.
+                Click on this <strong><a href="proveedor">link</a></strong> to visit previous page.
                 <br>
                 <a href="https://datatables.net/examples/api/select_single_row.html">
                     https://datatables.net/examples/api/select_single_row.html
                 </a>
                 <br>
                 <br>
-                <label>Agregar un nuevo proveedor.</label>
+                <label>Agregar un nuevo pedido.</label>
                 <br>
                 <br>
             </header>
                 <form method="post" >
-                <label>Nombre</label>
-                <input type="text" name="nombre" >
-                <label>Apellidos</label>
-                <input type="text" name="apellidos" >
-                <label>Correo</label>
-                <input type="text" name="correo" >
-                <label>Telefono</label>
-                <input type="text" name="telefono" >
-               
+                <label>Concepto</label>
+                <input type="text" name="concepto" >
+                <label>Cantidad</label>
+                <input type="text" name="cantidad" >
+                <label>Precio</label>
+                <input type="text" name="precio" >
+                
                 <button type= "button" onclick="save()"  >Guardar</button>
             </form>
 
-            <h1>Proveedores</h1>
+            <h1>Pedidos</h1>
             <h2>Empleando los parámetros Model</h2>
             <div class="starter-template">
                 <table class="table table-striped table-hover table-condensed table-bordered">
                     <tr>
                      <th>Id</th>
-                     <th>Nombre</th>
-                     <th>Apellidos</th>
-                       <th>Correo</th>
-                         <th>Telefono</th>
+                     <th>Concepto</th>
+                     <th>Cantidad</th>
+                       <th>Precio</th>                        
                            
                     </tr>
-                    <c:forEach var="proveedores" items="${proveedor}">
+                    <c:forEach var="pedidos" items="${pedido}">
                      <tr>
-                      <td>${proveedores.id}</td>
-                      <td>${proveedores.nombre}</td>
-                      <td>${proveedores.apellidos}</td>
-                      <td>${proveedores.correo}</td>
-                       <td>${proveedores.telefono}</td>
+                      <td>${pedidos.id}</td>
+                      <td>${pedidos.concepto}</td>
+                      <td>${pedidos.cantidad}</td>
+                      <td>${pedidos.precio}</td>                       
                      </tr>
                     </c:forEach>
                 </table>
@@ -74,24 +70,22 @@
             <h2>Empleando la rest Api</h2>
             <button id="btnDelete" type="button" >Borrar fila seleccionada</button>
             <div class="starter-template">
-                <table id="proveedorTable" class="display">
+                <table id="pedidoTable" class="display">
                    <thead>
                         <tr>
                             <th>Id</th>
-                            <th>Nombre</th>
-                            <th>Apellidos</th>
-                             <th>Correo</th>
-                              <th>Telefono</th>
+                            <th>Concepto</th>
+                            <th>Cantidad</th>
+                             <th>Precio</th>                            
                                
                         </tr>
                     </thead>
                     <tfoot>
                         <tr>
                             <th>id</th>
-                            <th>nombre</th>
-                            <th>apellidos</th>
-                            <th>correo</th>
-                            <th>telefono</th>
+                            <th>concepto</th>
+                            <th>cantidad</th>
+                            <th>precio</th>                           
                             
                         </tr>
                     </tfoot>
@@ -105,7 +99,7 @@
         <script type="text/javascript" src="webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
         <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
-    	<script src="${contextPath}/resources/js/datatableproveedor.js"></script>
+    	<script src="${contextPath}/resources/js/datatablepedido.js"></script>
         <script>
             /*
             (function ($) {
@@ -133,14 +127,14 @@
                     console.log (urlport);
                     $.ajax({
                         //url: urlport + "/api/productos", // verificar si se utiliza la ruta y puerto desde application.properties
-                        url: "/api/proveedor",
+                        url: "/api/pedido",
                         type: 'POST', dataType: 'json',
                         contentType: "application/json; charset=utf-8",
                         data: dataForm,
                         success: function(data) {
                             console.log ( data.nombre );
                             //$('#productosTable').dataTable().fnClearTable(); // borrar todo
-                            $('#proveedorTable').dataTable().fnAddData(data);
+                            $('#pedidoTable').dataTable().fnAddData(data);
                         }, 
                         error: function( jqXHR, textStatus, errorThrown ) {
                             alert ("error: " + textStatus );
@@ -151,8 +145,8 @@
                 }
 
                 $(document).ready(function() {
-                    var table = $('#proveedorTable').DataTable();
-                    $('#proveedorTable tbody').on( 'click', 'tr', function () {
+                    var table = $('#pedidoTable').DataTable();
+                    $('#pedidoTable tbody').on( 'click', 'tr', function () {
                         if ( $(this).hasClass('selected') ) {
                             $(this).removeClass('selected');
                         }

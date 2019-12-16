@@ -14,6 +14,8 @@
 			 <br>
                          <strong><a href="/proveedor">Proveedores</a></strong> 
                          <br>
+                         <strong><a href="/pedido">Pedidos</a></strong> 
+                         <br>
 		</div>
 	</div>
 </body>
