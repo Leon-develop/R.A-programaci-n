@@ -20,6 +20,11 @@
                 <a href="https://datatables.net/examples/api/select_single_row.html">
                     https://datatables.net/examples/api/select_single_row.html
                 </a>
+                <br>
+                <br>
+                <label>Agregar un nuevo producto.</label>
+                <br>
+                <br>
             </header>
             <form method="post" >
                 <label>Nombre</label>

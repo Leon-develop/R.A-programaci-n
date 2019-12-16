@@ -2,8 +2,10 @@ package com.example.demo.controller;
 
 import com.example.demo.model.Cliente;
 import com.example.demo.model.Producto;
+import com.example.demo.model.Proveedores;
 import com.example.demo.repository.ClienteRepository;
 import com.example.demo.repository.ProductoRepository;
+import com.example.demo.repository.ProveedoresRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.env.Environment;
@@ -24,13 +26,18 @@ public class PagesController {
         private Environment envc;
         @Autowired
         ClienteRepository clienteRepository;
+         @Autowired
+        private Environment envpr;
+        @Autowired
+        ProveedoresRepository proveedoresRepository;
+         
 
 	@RequestMapping("/productos")
 	public String home(Model model) {
 		model.addAttribute("site_urlport", env.getProperty("site.urlport") );
 		//System.out.println( env.getProperty("site.urlport") );
 
-		model.addAttribute("message", "Hola Mundo !!");
+		model.addAttribute("message", "PRODUCTOS");
 		for (Producto p: productoRepository.findAll() ) {
 			System.out.println(p.nombre);
 		}
@@ -43,13 +50,27 @@ public class PagesController {
 		model.addAttribute("site_urlport", envc.getProperty("site.urlport") );
 		//System.out.println( env.getProperty("site.urlport") );
 
-		model.addAttribute("message", "Hola Mundo !!");
+		model.addAttribute("message", "CLIENTES");
 		for (Cliente p: clienteRepository.findAll() ) {
 			System.out.println(p.nombre);
 		}
 		model.addAttribute("cliente", clienteRepository.findAll());
 		return "cliente";
+                
 	}
+        @RequestMapping("/proveedor")
+	public String home3(Model model) {
+		model.addAttribute("site_urlport", envpr.getProperty("site.urlport") );
+		//System.out.println( env.getProperty("site.urlport") );
+
+		model.addAttribute("message", "PROVEEDORES");
+                
+		for (Proveedores p: proveedoresRepository.findAll() ) {
+			System.out.println(p.nombre);
+		}
+		model.addAttribute("proveedor", proveedoresRepository.findAll());
+		return "proveedor";
+        }
 		
 	@RequestMapping("/")
 	public String next(Map<String, Object> model) {

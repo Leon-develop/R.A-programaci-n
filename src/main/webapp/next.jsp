@@ -4,14 +4,16 @@
 <body>
 	<div>
 		<div>
-			<h1>Another page</h1>
+			<h1>Menú</h1>
 			<h2>Hello ${message}</h2>
-			<strong><a href="/">home</a></strong> 
+			<strong><a href="/">Home</a></strong> 
 			<br>
-			<strong><a href="/productos">productos</a></strong> 
+			<strong><a href="/productos">Productos</a></strong> 
 			 <br>
-			 <strong><a href="/cliente">clientes</a></strong> 
+			 <strong><a href="/cliente">Clientes</a></strong> 
 			 <br>
+                         <strong><a href="/proveedor">Proveedores</a></strong> 
+                         <br>
 		</div>
 	</div>
 </body>

@@ -1,6 +1,6 @@
 <%-- 
-    Document   : cliente
-    Created on : 10/12/2019, 06:14:48 PM
+    Document   : proveedor
+    Created on : 15/12/2019, 11:14:36 PM
     Author     : Leo González
 --%>
 
@@ -20,15 +20,16 @@
          <div class="container">
             <header>
                 <h2>${message}</h2>
-                Click on this <strong><a href="proveedor">link</a></strong> to visit another page.
+                Click on this <strong><a href="/">link</a></strong> to visit another page.
                 <br>
-                
+                Click on this <strong><a href="cliente">link</a></strong> to visit previous page.
+                <br>
                 <a href="https://datatables.net/examples/api/select_single_row.html">
                     https://datatables.net/examples/api/select_single_row.html
                 </a>
                 <br>
                 <br>
-                <label>Agregar un nuevo cliente.</label>
+                <label>Agregar un nuevo proveedor.</label>
                 <br>
                 <br>
             </header>
@@ -37,20 +38,15 @@
                 <input type="text" name="nombre" >
                 <label>Apellidos</label>
                 <input type="text" name="apellidos" >
-                <label>Sexo</label>
-                <input type="text" name="sexo" >
-                <label>Edad</label>
-                <input type="text" name="edad" >
-                <label>Gmail</label>
-                <input type="text" name="email" >
-                 <br>
+                <label>Correo</label>
+                <input type="text" name="correo" >
                 <label>Telefono</label>
                 <input type="text" name="telefono" >
                
-                <button type="button" onclick="save()"  >Guardar</button>
+                <button type= "button" onclick="save()"  >Guardar</button>
             </form>
 
-            <h1>Clientes</h1>
+            <h1>Proveedores</h1>
             <h2>Empleando los parámetros Model</h2>
             <div class="starter-template">
                 <table class="table table-striped table-hover table-condensed table-bordered">
@@ -58,20 +54,17 @@
                      <th>Id</th>
                      <th>Nombre</th>
                      <th>Apellidos</th>
-                       <th>Sexo</th>
-                         <th>Edad</th>
-                           <th>Gmail</th>
-                             <th>Telefono</th>
+                       <th>Correo</th>
+                         <th>Telefono</th>
+                           
                     </tr>
-                    <c:forEach var="clientes" items="${cliente}">
+                    <c:forEach var="proveedores" items="${proveedor}">
                      <tr>
-                      <td>${clientes.id}</td>
-                      <td>${clientes.nombre}</td>
-                      <td>${clientes.apellidos}</td>
-                       <td>${clientes.sexo}</td>
-                        <td>${clientes.edad}</td>
-                         <td>${clientes.email}</td>
-                          <td>${clientes.telefono}</td>
+                      <td>${proveedores.id}</td>
+                      <td>${proveedores.nombre}</td>
+                      <td>${proveedores.apellidos}</td>
+                      <td>${proveedores.correo}</td>
+                       <td>${proveedores.telefono}</td>
                      </tr>
                     </c:forEach>
                 </table>
@@ -81,16 +74,15 @@
             <h2>Empleando la rest Api</h2>
             <button id="btnDelete" type="button" >Borrar fila seleccionada</button>
             <div class="starter-template">
-                <table id="clienteTable" class="display">
+                <table id="proveedorTable" class="display">
                    <thead>
                         <tr>
                             <th>Id</th>
                             <th>Nombre</th>
                             <th>Apellidos</th>
-                             <th>Sexo</th>
-                              <th>Edad</th>
-                               <th>Email</th>
-                                <th>Telefono</th>
+                             <th>Correo</th>
+                              <th>Telefono</th>
+                               
                         </tr>
                     </thead>
                     <tfoot>
@@ -98,10 +90,9 @@
                             <th>id</th>
                             <th>nombre</th>
                             <th>apellidos</th>
-                            <th>sexo</th>
-                            <th>edad</th>
-                            <th>email</th>
+                            <th>correo</th>
                             <th>telefono</th>
+                            
                         </tr>
                     </tfoot>
                 </table>
@@ -114,7 +105,7 @@
         <script type="text/javascript" src="webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
         <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
-    	<script src="${contextPath}/resources/js/datatablecliente.js"></script>
+    	<script src="${contextPath}/resources/js/datatableproveedor.js"></script>
         <script>
             /*
             (function ($) {
@@ -142,14 +133,14 @@
                     console.log (urlport);
                     $.ajax({
                         //url: urlport + "/api/productos", // verificar si se utiliza la ruta y puerto desde application.properties
-                        url: "/api/cliente",
+                        url: "/api/proveedor",
                         type: 'POST', dataType: 'json',
                         contentType: "application/json; charset=utf-8",
                         data: dataForm,
                         success: function(data) {
                             console.log ( data.nombre );
                             //$('#productosTable').dataTable().fnClearTable(); // borrar todo
-                            $('#clienteTable').dataTable().fnAddData(data);
+                            $('#proveedorTable').dataTable().fnAddData(data);
                         }, 
                         error: function( jqXHR, textStatus, errorThrown ) {
                             alert ("error: " + textStatus );
@@ -160,8 +151,8 @@
                 }
 
                 $(document).ready(function() {
-                    var table = $('#clienteTable').DataTable();
-                    $('#clienteTable tbody').on( 'click', 'tr', function () {
+                    var table = $('#proveedorTable').DataTable();
+                    $('#proveedorTable tbody').on( 'click', 'tr', function () {
                         if ( $(this).hasClass('selected') ) {
                             $(this).removeClass('selected');
                         }
@@ -181,4 +172,3 @@
 
 </html>
 
-   
